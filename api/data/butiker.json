@@ -2,23 +2,27 @@
     "stream":[
         {
             "id": 1,
-            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla orci libero, pharetra id quam ut, dapibus semper dolor. Pellentesque ut risus ut risus tristique efficitur at at libero. Mauris non tempor est. Quisque vulputate a lorem nec dictum. Phasellus dictum tortor in magna congue cursus. Praesent felis diam, egestas ut est sit amet, commodo rutrum nisl. Aenean varius in mi sed fermentum. Aliquam laoreet mi at egestas vulputate. ",
-            "tag": "ica" 
+            "content": "Ica har idag rea på potatis,tomat och chips 20% ",
+            "tag": "ica",
+            "date": "2021-01-10" 
         },
         {
             "id": 2,
-            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla orci libero, pharetra id quam ut, dapibus semper dolor. Pellentesque ut risus ut risus tristique efficitur at at libero. Mauris non tempor est. Quisque vulputate a lorem nec dictum. Phasellus dictum tortor in magna congue cursus. Praesent felis diam, egestas ut est sit amet, commodo rutrum nisl. Aenean varius in mi sed fermentum. Aliquam laoreet mi at egestas vulputate. ",
-            "tag": "coop" 
+            "content": "Coop har idag rea på potatis,tomat och chips 20%",
+            "tag": "coop",
+            "date": "2021-01-10" 
         },
         {
             "id": 3,
-            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla orci libero, pharetra id quam ut, dapibus semper dolor. Pellentesque ut risus ut risus tristique efficitur at at libero. Mauris non tempor est. Quisque vulputate a lorem nec dictum. Phasellus dictum tortor in magna congue cursus. Praesent felis diam, egestas ut est sit amet, commodo rutrum nisl. Aenean varius in mi sed fermentum. Aliquam laoreet mi at egestas vulputate. ",
-            "tag": "mathem" 
+            "content": "Mathem har idag rea på potatis,tomat och chips 20%",
+            "tag": "mathem",
+            "date": "2021-01-10" 
         },
         {
             "id": 4,
-            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla orci libero, pharetra id quam ut, dapibus semper dolor. Pellentesque ut risus ut risus tristique efficitur at at libero. Mauris non tempor est. Quisque vulputate a lorem nec dictum. Phasellus dictum tortor in magna congue cursus. Praesent felis diam, egestas ut est sit amet, commodo rutrum nisl. Aenean varius in mi sed fermentum. Aliquam laoreet mi at egestas vulputate. ",
-            "tag": "mathem" 
+            "content": "Mathem har idag rea på potatis,tomat och chips 20%",
+            "tag": "mathem",
+            "date": "2021-01-10" 
         }
 
     ]

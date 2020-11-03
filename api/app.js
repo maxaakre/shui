@@ -8,8 +8,10 @@ app.use(express.json());
 app.use(cors());
 
 const userRoutes = require("./routes/users");
+const butikRouter = require("./routes/butiker");
 
 app.use("/api", userRoutes);
+app.use("/api/butiker", butikRouter);
 
 app.use(express.static(path.join(__dirname, "/public")));
 app.get("/", (req, res) =>
