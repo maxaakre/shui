@@ -26,6 +26,43 @@ export default new Vuex.Store({
     TOGGLE_SIDE_MENU(state) {
       state.isOpen = !state.isOpen;
     },
+    saveEmail(state, credentials){
+      console.log(credentials)
+      state.dataEmail = credentials
+    },
+
+    removeUser(state, userId){
+      state.auth.user = state.auth.user.filter(
+        user => user._id != userId
+      )
+    },
+    auth(state, body) {
+      state.auth.user = body.user;
+      state.auth.loggedIn = true;
+
+      API.setAuthHeader(body.token);
+
+      const user = body.user;
+      const token = body.token;
+
+      // Set session
+      sessionStorage.setItem("users", JSON.stringify({ user, token }));
+    },
+    login(state) {
+      state.auth.loggedIn = true;
+      state.auth.error = false;
+    },
+    failLogin(state) {
+      state.auth.login = false;
+      state.auth.error = true;
+      API.clearAuthHeader();
+    },
+    logout(state) {
+      state.auth.loggedIn = false;
+      state.auth.error = false;
+      API.clearAuthHeader();
+      sessionStorage.removeItem("users");
+    },
   },
 
   actions: {

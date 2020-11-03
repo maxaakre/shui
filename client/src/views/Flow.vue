@@ -1,7 +1,7 @@
 <template>
     <div class="flow">
-    <!-- <h1> Något gick fel testa logga in igen</h1>     -->
-    <div class="list" >
+    <h1 v-if="!auth.loggedIn"> Något gick fel testa logga in igen</h1>    
+    <div class="list" v-if="auth.loggedIn" >
         <ul>
         <li v-for="item in items.stream"
           :key="item.id">

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="content" >
+    <div class="content" >
     <img id="logo" alt="Vue logo" src="../assets/s-logo.png" >
     <h1>SHUI</h1>
     <p>FLOW FREELY</p>
@@ -9,7 +9,7 @@
         placeholder="Användarnamn" />
         <input type="password" v-model="credentials.password" 
         placeholder="Lösenord" />
-        <button type="submit" class="btn">Logga in</button>
+        <button type="submit" @click="goTo" class="btn">Logga in</button>
         
     </form>
     <img id="blue" src="../assets/blue.png" alt="blue.png">
@@ -27,7 +27,18 @@
       },
     };
   },
+    computed:{
+        auth() {
+        return this.$store.state.auth;
+        },
+    },
     methods:{
+        goTo(){
+            setTimeout(function () {
+                this.$router.push("/flow")
+                
+            }, 3000);
+        },
         login() {
         if (this.credentials.email == "" || this.credentials.password == "") {
         return;
@@ -41,7 +52,7 @@
 </script>
 
 <style lang="scss" >
-@import url('https://fonts.googleapis.com/css2?family=Cantarell:wght@700&family=PT+Sans:wght@700&display=swap');
+
 .content{
     margin-top:5rem ;
    

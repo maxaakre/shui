@@ -37,6 +37,11 @@
             error: "Fill in input fielde's",
         }
     },
+    computed: {
+        auth() {
+        return this.$store.state.auth;
+        },
+  },
     methods:{
         async register() {
             this.error = "";
@@ -90,6 +95,7 @@
       }
       input{
           padding: 1rem;
+          font-size: 20px;
       }
       a{
           color: #fff;
