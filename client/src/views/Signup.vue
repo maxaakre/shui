@@ -4,7 +4,7 @@
     <img id="logo" alt="Vue logo" src="../assets/s-logo.png" >
     <h1>SHUI</h1>
     <p>FLOW FREELY</p>
-    <form>
+    <form @submit.prevent="register">
         <p v-if="error" class="error-message">{{ error }}</p>
         <label for="text">Usermname</label>
         <input type="text" v-model="credentials.name" />
@@ -14,10 +14,11 @@
         <input type="password" v-model="credentials.password" />
         <label for="password"> Repeat password</label>
         <input type="password" v-model="credentials.repeatPassword" />
-        <a href="#" @click="register" class="btn"> Sign me up! </a>
-        <router-link to="/login" class="login"
+        <button type="submit" class="btn"> Sign me up! </button>
+        <router-link v-if="!auth.loggedIn" to="/login" class="login"
         >Already a member click here!
       </router-link>
+      <router-link v-if="auth.loggedIn" to="/flow">To Streams</router-link>
     </form>
     <img id="blue" src="../assets/blue.png" alt="blue.png">
     </div>

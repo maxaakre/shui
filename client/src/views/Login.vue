@@ -9,7 +9,7 @@
         placeholder="Användarnamn" />
         <input type="password" v-model="credentials.password" 
         placeholder="Lösenord" />
-        <button type="submit" @click="goTo" class="btn">Logga in</button>
+        <button type="submit" class="btn">Logga in</button>
         
     </form>
     <img id="blue" src="../assets/blue.png" alt="blue.png">
@@ -33,18 +33,14 @@
         },
     },
     methods:{
-        goTo(){
-            setTimeout(function () {
-                this.$router.push("/flow")
-                
-            }, 3000);
-        },
+     
         login() {
         if (this.credentials.email == "" || this.credentials.password == "") {
         return;
         }
         this.$store.dispatch("login", this.credentials);
         this.$store.commit('saveEmail', this.credentials.email)
+        this.$router.push("/flow")
         },
     }    
         

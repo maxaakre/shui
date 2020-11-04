@@ -13,13 +13,7 @@ import Streams from '@/components/Streams.vue'
 export default {
   components:{
     Streams
-  },
-  
-//   methods:{
-//   streams(){
-  
-//   }
-// }
+  }
 }
 </script>
 

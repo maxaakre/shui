@@ -2,7 +2,7 @@
   <div class="wrapper" :class="{ toggle: isOpen }">
   <img alt="red logo" src="../assets/s-logo-red.png" @click="$store.commit('TOGGLE_SIDE_MENU')" >
   <h2>Streams</h2>
-  <button>Shit, Theyre on to me!</button>
+  <button @click="remove">Shit, Theyre on to me!</button>
   </div>  
   
 </template>
@@ -11,11 +11,28 @@
 import { mapState } from "vuex";  
 export default {
   name: 'Streams',
-    
+  data() {
+    return {
+      credentials:{
+        email: []
+      }
+    }
+  },  
   computed:{
-  ...mapState(["isOpen"]),
-  }
- 
+  ...mapState(["isOpen", "dataEmail"]),
+
+  },
+  
+ methods:{
+   remove(){
+      console.log("error",this.credentials.email)
+      this.$store.dispatch('userRemove', this.credentials.email)
+    },
+ },
+ mounted(){
+   console.log("Detta finns i credentails.email", this.credentials.email)
+   this.credentials.email = this.$store.state.dataEmail
+ }
 }
 </script>
 <style lang="scss" scoped>
@@ -24,6 +41,7 @@ export default {
   display: none;
   width: 100px;
   background: red;
+
   h2{
     color: #fff;
     padding: 2rem;

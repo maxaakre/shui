@@ -20,6 +20,16 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    removeUser(state, userId){
+      state.auth.loggedIn = false;
+      state.auth.error = false;
+      API.clearAuthHeader();
+      sessionStorage.removeItem("users");
+      state.auth.user = state.auth.user.filter(
+        user => user._id != userId
+      )
+      
+    },
     displayMeets(state, items) {
       state.items = items;
     },
@@ -29,12 +39,6 @@ export default new Vuex.Store({
     saveEmail(state, credentials){
       console.log(credentials)
       state.dataEmail = credentials
-    },
-
-    removeUser(state, userId){
-      state.auth.user = state.auth.user.filter(
-        user => user._id != userId
-      )
     },
     auth(state, body) {
       state.auth.user = body.user;
@@ -66,9 +70,18 @@ export default new Vuex.Store({
   },
 
   actions: {
+    userRemove(ctx){
+      console.log("DELETE error", ctx.state.dataEmail)
+      API.remove(ctx.state.dataEmail)
+      .then(response => {
+        console.log(response)
+        ctx.commit('removeUser', ctx.dataEmail)
+      })
+      .catch(console.log)
+    },
     async getMeetList(context) {
       let resp = await axios.get(API);
-      context.commit("displayMeets", resp.data.meet);
+      context.commit("displayMeets", resp.data.stream);
       console.log(resp);
     },
     register({ commit }, newUser) {

@@ -1,2 +1,4 @@
 {"email":"Max@gmail.com","password":"$2b$10$pVgZBie69NHTOq8a5gf8nOTpwtdkQXdODInZSeMmtenQZp3SSGIiG","role":"user","name":"Maxaakre","_id":"2006dc57-95cc-432e-81e3-60ef01993909"}
 {"email":"mix@gmail.com","password":"$2b$10$uyylbDiUI.y5/iVF0b7fq.NWDiMQppNCHPhYkOLnHC3f1zkaq/X8q","role":"user","name":"mix","_id":"58aa265e-581d-4d2b-af45-9e7d864ab237"}
+{"email":"hej@gmai.com","password":"$2b$10$Hf2T1qjRZ5mB3K2rNX2XReAov4WNSR97r.dqGDdStm3V9VxL3SY5u","role":"user","name":"hej","_id":"a07d07b3-1c2d-433e-9153-52559a147b3e"}
+{"email":"max3@gmai.com","password":"$2b$10$R/U1LrQ/KsD5irouBPM27.DjOAmcKpBEf4nTutvIDEMsw.qhgErVm","role":"user","name":"max3","_id":"a59f1e99-d7b3-4ad1-929a-a67d610199d6"}

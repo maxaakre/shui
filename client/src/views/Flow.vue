@@ -10,7 +10,7 @@
           <span>{{'---' + item.tag}}</span>
         </li>
 
-        <button>Add Streams</button>
+        <button @click="$store.commit('TOGGLE_SIDE_MENU')">Add Streams</button>
         </ul>
     </div>
     </div>
@@ -25,6 +25,7 @@ import axios from "axios";
                     items:{}
                 }
             },
+            
             auth() {
             return this.$store.state.auth;
             }
@@ -35,7 +36,7 @@ import axios from "axios";
                 this.items = RESPONSE.data;
             },
             // beforeMount() {
-            //     return this.$store.dispatch("getMeetList");
+            //     return this.$store.dispatch("getMeetList", stream);
             // },
     }    
 </script>
@@ -44,6 +45,7 @@ import axios from "axios";
 .flow{
     padding: 1rem;
     height: 100vh;
+    background: #082756;
     .list{
         
         padding: 1rem;
@@ -91,18 +93,8 @@ import axios from "axios";
         border: 1px solid #000000;
         box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
         
-    }    
+    }  
+ 
 }
 </style>
 
-
-/* Vector 4 */
-
-position: absolute;
-width: 32px;
-height: 32px;
-left: 363px;
-top: 210px;
-
-background: #FFFFFF;
-box-shadow: inset 0px 4px 3px rgba(0, 0, 0, 0.1);
