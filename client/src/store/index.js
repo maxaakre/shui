@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     isOpen: false,
     items:[],
+    tag:[],
     dataEmail: [],
     auth: {
       loggedIn: false,
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    createTag(state,tags){
+      state.tag = tags
+    },
     removeUser(state, userId){
       state.auth.loggedIn = false;
       state.auth.error = false;

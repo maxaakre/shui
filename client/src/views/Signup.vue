@@ -4,7 +4,7 @@
     <img id="logo" alt="Vue logo" src="../assets/s-logo.png" >
     <h1>SHUI</h1>
     <p>FLOW FREELY</p>
-    <form @submit.prevent="register">
+    <form @submit.prevent="register" >
         <p v-if="error" class="error-message">{{ error }}</p>
         <label for="text">Usermname</label>
         <input type="text" v-model="credentials.name" />
@@ -15,7 +15,8 @@
         <label for="password"> Repeat password</label>
         <input type="password" v-model="credentials.repeatPassword" />
         <button type="submit" class="btn"> Sign me up! </button>
-        <router-link v-if="!auth.loggedIn" to="/login" class="login"
+        <!-- <a class="btn" href="/login" v-if="auth.loggedIn"> Logga in!</a> -->
+        <router-link  to="/login" class="login"
         >Already a member click here!
       </router-link>
       <router-link v-if="auth.loggedIn" to="/flow">To Streams</router-link>
@@ -35,7 +36,7 @@
                 repeatPassword: "",
                 name: "",
             },
-            error: "Fill in input fielde's",
+            error: "",
         }
     },
     computed: {
@@ -45,6 +46,7 @@
   },
     methods:{
         async register() {
+            console.log("jalla")
             this.error = "";
             if (this.credentials.email == "" || this.credentials.password == "") {
                 this.error = "Fill in input fielde's";
@@ -53,6 +55,7 @@
                 this.error = "invalid mail";
                 return;
             }
+            this.$store.commit('saveEmail', this.credentials.email)
             await this.$store.dispatch("register", this.credentials);
             await sessionStorage.setItem("users", JSON.stringify(this.credentials));
             },

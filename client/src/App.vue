@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <img alt="red logo" src="./assets/s-logo-red.png" @click="$store.commit('TOGGLE_SIDE_MENU')" >
+      <img class="streams" alt="red logo" src="./assets/s-logo-red.png" @click="$store.commit('TOGGLE_SIDE_MENU')" >
     <Streams/>
     </div>
     <router-view/>
@@ -35,7 +35,7 @@ export default {
 
 #nav{
 width: 100%;
-img{
+.streams{
   z-index: 1;
   width: 50px;
   margin-left: 20px;

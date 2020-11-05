@@ -1,16 +1,19 @@
 <template>
-    <div class="flow">
-    <h1 v-if="!auth.loggedIn"> Något gick fel testa logga in igen</h1>    
-    <div class="list" v-if="auth.loggedIn" >
-        <ul>
-        <li v-for="item in items.stream"
+    <div class="flow" >
+    <div class="false" v-if="!auth.loggedIn">
+    <h1> Något gick fel testa logga in igen</h1> 
+    <router-link class="btn" to="/login">Try again!</router-link>   
+    </div>    
+    <div class="list" v-if="hasItems" >
+        <ul v-if="auth.loggedIn">
+        <li  v-for="item in items.stream"
           :key="item.id">
           <span>{{item.date}}</span>
           <p>{{item.content}}</p>
           <span>{{'---' + item.tag}}</span>
         </li>
 
-        <button @click="$store.commit('TOGGLE_SIDE_MENU')">Add Streams</button>
+        <button class="btn" @click="$store.commit('TOGGLE_SIDE_MENU')">Add Streams</button>
         </ul>
     </div>
     </div>
@@ -19,21 +22,23 @@
 <script>
 import axios from "axios";
     export default {
+        data() {
+            return {
+                hasItems:false,
+                items:{}
+            }
+        },
         computed: {
-            data() {
-                return {
-                    items:{}
-                }
-            },
             
             auth() {
             return this.$store.state.auth;
             }
         
         },
-            async created()  {
+            async mounted()  {
                 const RESPONSE = await axios.get("/api/butiker");
-                this.items = RESPONSE.data;
+                this.items = await RESPONSE.data;
+                this.hasItems = true
             },
             // beforeMount() {
             //     return this.$store.dispatch("getMeetList", stream);
@@ -82,7 +87,7 @@ import axios from "axios";
     
        
     }
-    button{
+    .btn{
         width: 90%;
         padding: 1rem;
         margin: auto 1rem;
