@@ -35,6 +35,7 @@
                 password: "",
                 repeatPassword: "",
                 name: "",
+                
             },
             error: "",
         }

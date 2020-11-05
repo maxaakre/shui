@@ -36,7 +36,7 @@ import axios from "axios";
         
         },
             async mounted()  {
-                const RESPONSE = await axios.get("/api/butiker");
+                const RESPONSE = await axios.get("/api/butiker/stores");
                 this.items = await RESPONSE.data;
                 this.hasItems = true
             },

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from "axios";
+// import axios from "axios";
 import * as API from "@/api";
 
 Vue.use(Vuex)
@@ -11,6 +11,7 @@ export default new Vuex.Store({
     items:[],
     tag:[],
     dataEmail: [],
+    store:[],
     auth: {
       loggedIn: false,
       error: false,
@@ -21,8 +22,8 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    createTag(state,tags){
-      state.tag = tags
+    createdStores(state,store){
+      state.stores = store
     },
     removeUser(state, userId){
       state.auth.loggedIn = false;
@@ -74,6 +75,14 @@ export default new Vuex.Store({
   },
 
   actions: {
+    json({commit} ,newStore){
+      API.create(newStore)
+      .then((store) =>{
+        console.log(store)
+        commit("createdStores", store)
+      })
+      .catch(console.log)
+    },
     userRemove(ctx){
       console.log("DELETE error", ctx.state.dataEmail)
       API.remove(ctx.state.dataEmail)
@@ -82,11 +91,6 @@ export default new Vuex.Store({
         ctx.commit('removeUser', ctx.dataEmail)
       })
       .catch(console.log)
-    },
-    async getMeetList(context) {
-      let resp = await axios.get(API);
-      context.commit("displayMeets", resp.data.stream);
-      console.log(resp);
     },
     register({ commit }, newUser) {
       API.register(newUser)

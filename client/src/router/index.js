@@ -25,6 +25,11 @@ const routes = [
     name: "flow",
     component: () => import("../views/Flow.vue"),
   },
+  {
+    path: "/file",
+    name: "file",
+    component: () => import("../views/File.vue"),
+  },
 ]
 
 const router = new VueRouter({

@@ -16,6 +16,7 @@ module.exports = {
     if (user) return;
     const newUser = await users.insert({
       email,
+      tag:"",
       password: await bcrypt.hash(password, 10),
     });
     const token = jwt.sign(
@@ -56,7 +57,7 @@ module.exports = {
     console.log("du deletade", id)
     const deleteUser = await users.remove({_id:id})
     console.log(deleteUser)
-    // chats.persistence.compactDatafile()
+    chats.persistence.compactDatafile()
     return deleteUser < 0
 }
 

@@ -3,12 +3,16 @@
   <div class="wrapper" :class="{ toggle: isOpen }">
   <img alt="red logo" class="streams" src="../assets/s-logo-red.png" @click="$store.commit('TOGGLE_SIDE_MENU')" >
   <h2>Streams</h2>
-  <ul>
+  <ul class="box">
     <li></li>
   </ul>
+  <form >
   <input class="text" type="text" v-model="input">
-  <img class="check" @click="tags" src="../assets/check.png" alt="check.png">
-  <button @click="remove">Shit, Theyre on to me!</button>
+  <button id="check">
+    <img id="line" src="../assets/check.png" alt="check.png">
+  </button>
+  </form>
+  <button class="removeuser" @click="remove">Shit, Theyre on to me!</button>
   </div>  
 
   </div>
@@ -31,7 +35,7 @@ export default {
   ...mapState(["isOpen", "dataEmail"]),
 
   },
-  
+ //spara tags i localhost för att sendan hämta och visa i flow 
  methods:{
    tags(){
      this.$store.dispatch('newTags', this.input)
@@ -66,6 +70,20 @@ left: 0;
     color: #fff;
     padding: 2rem;
   }
+  .box{
+    width: 80%;
+    height: 200px;
+    margin-left: 1.5rem;
+    border: 1px solid black;
+    list-style: none;
+  }
+  li{
+    margin: 1rem;
+    width: 120px;
+    height: 50px;
+    border: 1px solid black;
+  }
+
   .text{
     position: absolute;
     padding: 1rem;
@@ -77,13 +95,22 @@ left: 0;
     border: 2px solid #fff;
     border-radius: 5px;
   }
-  .check{
+  #line{
+   background: yellow;
+   position: relative;
+   width: 55px;
+   right: 17px;
+   bottom: 15px; 
+  }
+  #check{
    position: absolute;
-   width: 52px;
-   height: 50px;
+   background: #fff;
+   width: 55px;
+   height: 60px;
    left: 299px;
-   top: 449px;
+   top: 447px;
    border-radius: 5px;
+   
     
   }
    button{

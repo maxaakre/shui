@@ -11,6 +11,11 @@ export const clearAuthHeader = function() {
   delete api.defaults.headers.common["Authorization"];
 };
 
+export const create = async (newStore) => {
+  console.log("POST", newStore)
+  const response = await api.post("/butiker/newstore", newStore)
+  return response.data
+};
 export const register = async (newUser) => {
   console.log("POST /register", " - Payload: ", newUser);
   const response = await api.post("/register", newUser);
