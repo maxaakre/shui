@@ -19,7 +19,6 @@ const decryptedString = cryptr.decrypt(encryptedString);
 router.get("/stores",async  (req,res) => {
 
 const data = await Butik.createdlogs(req.body)
-console.log(data)
 if(data){
   res.status(200).json(data);
   return; 
@@ -34,7 +33,7 @@ router.post("/newstore", async (req, res) => {
     res.status(200).json(data);
     return;
   }
-  res.status(500).json({ error: "Credentials not valid" });
+  res.status(500).json({ error: "Dont find Stream" });
 });
 
 module.exports = router;

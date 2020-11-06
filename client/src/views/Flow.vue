@@ -6,12 +6,12 @@
     </div>    
     <div class="list" v-if="hasItems" >
         <ul v-if="auth.loggedIn">
-        <li  v-for="item in items.stream"
-          :key="item.id">
-          <span>{{item.date}}</span>
-          <p>{{item.content}}</p>
-          <span>{{'---' + item.tag}}</span>
+       <li class="list-item" v-for="stream in streams" :key="stream._id">
+          <p>{{ stream.date }}</p>
+          <p>{{ stream.content }}</p>
+          <p>#{{ stream.tag }}</p>
         </li>
+
 
         <button class="btn" @click="$store.commit('TOGGLE_SIDE_MENU')">Add Streams</button>
         </ul>
@@ -25,7 +25,7 @@ import axios from "axios";
         data() {
             return {
                 hasItems:false,
-                items:{}
+                streams:[]
             }
         },
         computed: {
@@ -37,7 +37,7 @@ import axios from "axios";
         },
             async mounted()  {
                 const RESPONSE = await axios.get("/api/butiker/stores");
-                this.items = await RESPONSE.data;
+                this.streams =  RESPONSE.data;
                 this.hasItems = true
             },
             // beforeMount() {

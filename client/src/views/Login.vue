@@ -40,6 +40,7 @@
         }
         this.$store.dispatch("login", this.credentials);
         this.$store.commit('saveEmail', this.credentials.email)
+        localStorage.setItem("user", JSON.stringify(this.credentials.email))
         this.$router.push("/flow")
         },
     }    

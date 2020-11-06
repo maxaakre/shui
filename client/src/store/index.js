@@ -22,6 +22,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    addedTags(state, tags){
+      state.tag = tags
+    },
     createdStores(state,store){
       state.stores = store
     },
@@ -75,6 +78,13 @@ export default new Vuex.Store({
   },
 
   actions: {
+    newTag({commit} ,input){
+      API.addtag(input)
+      .then((tags) =>{
+        console.log(tags)
+        commit("addedTags", tags)
+      })
+    },
     json({commit} ,newStore){
       API.create(newStore)
       .then((store) =>{

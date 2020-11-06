@@ -20,14 +20,19 @@ module.exports = {
         return newStore
     },
 
-    async createdlogs(logs){
-        const {content,tag,date} = logs;
-        console.log(logs)
-        const newStore = await butik.find({ 
-            tag
+    async createdlogs(){
+        const stores = await butik.find({})
+        const newStores = stores.map( store => {
+            const storeObejc = {
+
+                content: cryptr.decrypt(store.content),
+                tag: store.tag,
+                date:  store.date
+            }
+            return storeObejc
         })
-        console.log("Detta får jag från newStore", newStore)
-        return newStore
+        console.log("Detta får jag från newStore", newStores)
+        return newStores
     }
 
     //post tag ska ligga här

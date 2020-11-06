@@ -4,11 +4,11 @@
   <img alt="red logo" class="streams" src="../assets/s-logo-red.png" @click="$store.commit('TOGGLE_SIDE_MENU')" >
   <h2>Streams</h2>
   <ul class="box">
-    <li></li>
+    <li v-for="tags in storedTags" :key="tags._id"></li>
   </ul>
-  <form >
+  <form @submit="tags">
   <input class="text" type="text" v-model="input">
-  <button id="check">
+  <button type="submit" id="check">
     <img id="line" src="../assets/check.png" alt="check.png">
   </button>
   </form>
@@ -21,6 +21,7 @@
 
 <script>
 import { mapState } from "vuex";  
+import axios from 'axios'
 export default {
   name: 'Streams',
   data() {
@@ -28,11 +29,14 @@ export default {
       credentials:{
         email: []
       },
-      input:[]
+      input:[],
+      userTags:[],
+      savedTags:[],
+      storedTags:[]
     }
   },  
   computed:{
-  ...mapState(["isOpen", "dataEmail"]),
+  ...mapState(["isOpen", "dataEmail","tag"]),
 
   },
  //spara tags i localhost för att sendan hämta och visa i flow 
@@ -48,6 +52,12 @@ export default {
  mounted(){
    console.log("Detta finns i credentails.email", this.credentials.email)
    this.credentials.email = this.$store.state.dataEmail
+   this.savedTags = this.$store.state.tag
+ },
+ async created(){
+   const RESPONSE = await axios.get("/api/tags/:uuid");
+                this.storedTags =  RESPONSE.data;
+                console.log("detta finns i tags", RESPONSE)
  }
 }
 </script>

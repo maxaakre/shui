@@ -4,7 +4,7 @@
             <label for="tag">tag</label>
             <input type="text" v-model="logs.tag">
             <label for="content">content</label>
-            <input type="text" v-model="logs.conent">
+            <input type="text" v-model="logs.content">
             <label for="date">date</label>
             <input type="text" v-model="logs.date">
             <button type="submit">Skicka till databasen</button>
@@ -17,9 +17,9 @@
         data() {
             return {
                 logs:{
-                    tag:[],
-                    content: [],
-                    date: []
+                    tag:"",
+                    content: "",
+                    date: ""
                 }
             }
         },
