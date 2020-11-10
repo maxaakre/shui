@@ -11,7 +11,7 @@ const cryptr = new Cryptr(process.env.SECRET);
 
 
 
-router.get("/stores",auth.auth, async  (req,res) => {
+router.get("/stores", async  (req,res) => {
 
 const data = await Butik.createdlogs()
 if(data){

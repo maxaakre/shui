@@ -6,13 +6,16 @@
     </div>    
     <div class="list" v-if="hasItems" >
         <ul v-if="auth.loggedIn">
-       <li class="list-item" v-for="stream in streams" :key="stream._id">
+       <!-- <li class="list-item" v-for="stream in streams" :key="stream._id">
           <p>{{ stream.date }}</p>
           <p>{{ stream.content }}</p>
-          <p>#{{ stream.tag }}</p>
+          <p>#{{ stream.tag }}</p>      
+        </li> -->
+        <li v-for="tag in filteredStreams" :key="tag._id">
+            <p>{{tag.date}}</p>
+            <p>{{tag.content}}</p>
+            <p>{{tag.date}}</p>
         </li>
-
-
         <button class="btn" @click="$store.commit('TOGGLE_SIDE_MENU')">Add Streams</button>
         </ul>
     </div>
@@ -25,21 +28,44 @@ import axios from "axios";
         data() {
             return {
                 hasItems:false,
-                streams:[]
+                streams:[],
+                hasTags:[]
             }
         },
         computed: {
+           filteredStreams() {
+            return this.streams.filter((el) => {
+            return this.hasTags.includes(el.tag)
             
+            })
+     
+    },    
             auth() {
             return this.$store.state.auth;
             }
         
         },
-            async mounted()  {
+            async mounted() {
                 const RESPONSE = await axios.get("/api/butiker/stores");
                 this.streams =  RESPONSE.data;
                 this.hasItems = true
-            },
+
+                let token = sessionStorage.getItem("users")
+                let parse = JSON.parse(token)
+                   setTimeout(async() =>{ 
+                    const USERTAGS = await axios.get("/api/usertags",{
+                    headers: {
+                    'Authorization': `Bearer ${parse.token}`
+                    }
+                    });
+                    console.log(USERTAGS.data)
+                    this.hasTags = USERTAGS.data;
+                    
+                
+                   
+                
+                   },2000)  
+            }
             // beforeMount() {
             //     return this.$store.dispatch("getMeetList", stream);
             // },

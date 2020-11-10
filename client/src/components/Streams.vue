@@ -4,12 +4,17 @@
   <img alt="red logo" class="streams" src="../assets/s-logo-red.png" @click="$store.commit('TOGGLE_SIDE_MENU')" >
   <h2>Streams</h2>
   <ul class="box">
-    <li v-for="(tag,index) in storedTags" :key="index">
-      <p>{{tag}}</p>
+    <li v-for="(tag,index) in filteredStreams" :key="index">
+      <p>#{{tag.tag}}</p>
+      <i @click="removeTag" class="fas fa-times"></i>
     </li>
   </ul>
   <form @submit.prevent="tags">
-  <input class="text" type="text" v-model="input">
+  <select class="text" v-model="input">
+    <option value="ica">ica</option>
+    <option value="coop">coop</option>
+    <option value="mathem">mathem</option>
+  </select>
   <button type="submit" id="check">
     <img id="line" src="../assets/check.png" alt="check.png">
   </button>
@@ -31,20 +36,33 @@ export default {
       credentials:{
         email: []
       },
+      deletedTag:[],
       input:"",
-      userTags:[],
+      hasTags:[],
       savedTags:[],
       storedTags:[]
     }
   },  
   computed:{
   ...mapState(["isOpen", "dataEmail","tag"]),
+  //users tagggar sen filtrera dom och gemföra med listan i flow filtrera stored tags
 
+  filteredStreams() {
+    return this.storedTags.filter((el) => {
+    return this.hasTags.includes(el.tag)
+    })  
   },
- //spara tags i localhost för att sendan hämta och visa i flow 
+}, 
+
  methods:{
+   removeTag(event){
+     console.log(event)
+     this.filteredStreams.splice(this.event)
+   },
    tags(){
+    console.log(this.input)
      this.$store.dispatch('newTag', this.input)
+     location.reload();
    },
    remove(){
       console.log("error",this.credentials.email)
@@ -52,11 +70,12 @@ export default {
     },
  },
  async mounted(){
+   //to remove user
    this.credentials.email = this.$store.state.dataEmail
    this.savedTags = this.$store.state.tag
+   //to load tags
    let token = sessionStorage.getItem("users")
    let parse = JSON.parse(token)
-   console.log(parse.token)
    setTimeout(async() =>{ 
      const RESPONSE = await axios.get("/api/tags",{
        headers: {
@@ -66,10 +85,18 @@ export default {
    console.log(RESPONSE.data)
    this.storedTags =  RESPONSE.data;
    console.log("detta finns i tags", RESPONSE)
+  }, 1000);
 
-
-
-    }, 3000);
+//to load and then filter width
+  setTimeout(async() =>{ 
+    const USERTAGS = await axios.get("/api/usertags",{
+        headers: {
+        'Authorization': `Bearer ${parse.token}`
+        }
+        });
+        console.log(USERTAGS.data)
+        this.hasTags = USERTAGS.data;
+  },1000)  
    
  },
 
@@ -95,17 +122,29 @@ left: 0;
     padding: 2rem;
   }
   .box{
-    width: 80%;
-    height: 200px;
+    display: grid;
     margin-left: 1.5rem;
-    border: 1px solid black;
-    list-style: none;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 3fr));
+  }
+  ul{
+    flex-direction: column;
+    padding: .5rem;
   }
   li{
-    margin: 1rem;
+    display:flex;
+    padding: .2rem;
     width: 120px;
-    height: 50px;
-    border: 1px solid black;
+    border: 1px solid rgba(255, 255, 255, 0.1);;
+    margin: .5rem 0;
+  }
+  p{
+    margin: auto;
+    margin-left: .5rem;
+    color: #fff;
+  }
+  i{
+    color: #fff;
+    margin: auto .2rem;
   }
 
   .text{

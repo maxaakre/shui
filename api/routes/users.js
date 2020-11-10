@@ -5,7 +5,6 @@ const butik = require("../models/Butiker")
 
 
 router.post("/register", async (req, res) => {
-  console.log("något")
   const user = await User.register(req.body);
   if (user) {
     res.status(201).json(user);
@@ -31,8 +30,9 @@ router.post("/delete", auth.auth, async (req,res) =>{
   }
 })
 
-router.post("/addtag" , auth.auth, async (req,res) => {
-  if(req.user.role = "user"){
+router.post("/addtag" , auth.auth,  async (req,res) => {
+  if(req.user.userID){
+    console.log(req.user.userID)
     console.log(req.body)
     const newtag = await User.insertTag(req.body, req.user.userID);
     res.status(201).json(newtag)
@@ -51,6 +51,18 @@ router.get("/tags", auth.auth, async (req, res) => {
     res.status(404).send("cant find resourses")
   }
 });
+
+router.get("/usertags",auth.auth, async (req,res) =>{
+  if(req.user.role = "user"){
+    const userArray = await User.findTag(req.user.userID)
+    console.log("apa",userArray)
+    if(userArray){
+      res.json(userArray)
+      return
+    }
+    res.status(404).send("cant find resourses")
+  }
+})
 
 
 module.exports = router;

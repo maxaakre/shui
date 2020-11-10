@@ -8,14 +8,48 @@ const jwt = require("jsonwebtoken");
 require("dotenv/config");
 
 module.exports = {
+//hämta en find med tag i
+
+async findTag(userID){
+    if(user = null) return;
+    let data = await users.findOne({_id:userID})
+      if(Array.isArray(data.tag)){
+        console.log(data.tag)
+        return data.tag
+      }
+
+    
+    
+},
+
+async insertTag(body, userID){
+    let user = await users.findOne({ userID });
+    let {input} = body
+    console.log(body ,input)
+    if(user = null) return;
+      let tagData = await users.findOne({_id:userID})
+      let data = [];
+      if(Array.isArray(tagData.tag)){
+        tagData.tag.push(input)
+        data = tagData.tag
+      }else{
+        data.push(input) 
+      }
+      return await users.update({_id:userID},{$set: {tag:data}})
+
+
+  },
+ 
+
  
   async register(credentials) {
-    const { email, password, repeatPassword } = credentials;
+    const { email, password, repeatPassword,tag } = credentials;
     if (email == "" || password == "" || repeatPassword == "") return;
     const user = await users.findOne({ email });
     if (user) return;
     const newUser = await users.insert({
       email,
+      tag,
       password: await bcrypt.hash(password, 10),
     });
     const token = jwt.sign(

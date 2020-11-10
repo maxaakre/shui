@@ -3,6 +3,7 @@ const butik = new Datastore({
   filename: "./db/butik.db",
   autoload: true,
 });
+
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr("myTotalySecretKey");
 
@@ -10,6 +11,8 @@ const cryptr = new Cryptr("myTotalySecretKey");
 require("dotenv/config");
 
 module.exports = {
+   
+
     async create(logs){
         const { content, tag, date } = logs;
         const newStore = await butik.insert({
