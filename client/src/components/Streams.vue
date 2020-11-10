@@ -4,9 +4,11 @@
   <img alt="red logo" class="streams" src="../assets/s-logo-red.png" @click="$store.commit('TOGGLE_SIDE_MENU')" >
   <h2>Streams</h2>
   <ul class="box">
-    <li v-for="tags in storedTags" :key="tags._id"></li>
+    <li v-for="(tag,index) in storedTags" :key="index">
+      <p>{{tag}}</p>
+    </li>
   </ul>
-  <form @submit="tags">
+  <form @submit.prevent="tags">
   <input class="text" type="text" v-model="input">
   <button type="submit" id="check">
     <img id="line" src="../assets/check.png" alt="check.png">
@@ -29,7 +31,7 @@ export default {
       credentials:{
         email: []
       },
-      input:[],
+      input:"",
       userTags:[],
       savedTags:[],
       storedTags:[]
@@ -42,23 +44,35 @@ export default {
  //spara tags i localhost för att sendan hämta och visa i flow 
  methods:{
    tags(){
-     this.$store.dispatch('newTags', this.input)
+     this.$store.dispatch('newTag', this.input)
    },
    remove(){
       console.log("error",this.credentials.email)
       this.$store.dispatch('userRemove', this.credentials.email)
     },
  },
- mounted(){
-   console.log("Detta finns i credentails.email", this.credentials.email)
+ async mounted(){
    this.credentials.email = this.$store.state.dataEmail
    this.savedTags = this.$store.state.tag
+   let token = sessionStorage.getItem("users")
+   let parse = JSON.parse(token)
+   console.log(parse.token)
+   setTimeout(async() =>{ 
+     const RESPONSE = await axios.get("/api/tags",{
+       headers: {
+      'Authorization': `Bearer ${parse.token}`
+    }
+     });
+   console.log(RESPONSE.data)
+   this.storedTags =  RESPONSE.data;
+   console.log("detta finns i tags", RESPONSE)
+
+
+
+    }, 3000);
+   
  },
- async created(){
-   const RESPONSE = await axios.get("/api/tags/:uuid");
-                this.storedTags =  RESPONSE.data;
-                console.log("detta finns i tags", RESPONSE)
- }
+
 }
 </script>
 <style lang="scss" scoped>

@@ -13,7 +13,9 @@ export const clearAuthHeader = function() {
 
 export const addtag = async (input) => {
   console.log("POST" , input)
-  const response = await api.post("/addtag:uuid",input)
+  const response = await api.post("/addtag", JSON.stringify({input}), {headers:{
+    'content-type': 'text/json'
+  } })
   return response.data
 }
 

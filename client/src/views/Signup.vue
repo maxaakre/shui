@@ -59,7 +59,6 @@
             this.$store.commit('saveEmail', this.credentials.email)
             await this.$store.dispatch("register", this.credentials);
             await sessionStorage.setItem("users", JSON.stringify(this.credentials));
-            await localStorage.setItem("user", JSON.stringify(this.credentials.email))
             },
             validEmail: function (email) {
             var regEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

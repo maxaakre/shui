@@ -4,7 +4,7 @@ const butik = new Datastore({
   autoload: true,
 });
 const Cryptr = require('cryptr');
-const cryptr = new Cryptr('myTotalySecretKey');
+const cryptr = new Cryptr("myTotalySecretKey");
 
 
 require("dotenv/config");

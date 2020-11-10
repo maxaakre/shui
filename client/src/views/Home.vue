@@ -42,8 +42,6 @@ export default {
   #blue{
     position: relative;
     top: 15rem ;
-    background: rgba(0, 178, 255, 0.8);
-    transform: matrix(-1, 0, 0, 1, 0, 0);
   }
 }
 </style>

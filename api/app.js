@@ -4,11 +4,15 @@ const cors = require("cors");
 const PORT = process.env.PORT || 5000;
 const path = require("path");
 
+const userRoutes = require("./routes/users");
+const butikRouter = require("./routes/butiker");
+
+
 app.use(express.json());
 app.use(cors());
 
-const userRoutes = require("./routes/users");
-const butikRouter = require("./routes/butiker");
+
+
 
 app.use("/api", userRoutes);
 app.use("/api/butiker", butikRouter);

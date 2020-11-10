@@ -5,10 +5,10 @@ const users = new Datastore({
 });
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const bodyParser = require("body-parser");
 require("dotenv/config");
 
 module.exports = {
+ 
   async register(credentials) {
     const { email, password, repeatPassword } = credentials;
     if (email == "" || password == "" || repeatPassword == "") return;
@@ -16,7 +16,6 @@ module.exports = {
     if (user) return;
     const newUser = await users.insert({
       email,
-      tag:"",
       password: await bcrypt.hash(password, 10),
     });
     const token = jwt.sign(

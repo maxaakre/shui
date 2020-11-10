@@ -40,7 +40,6 @@
         }
         this.$store.dispatch("login", this.credentials);
         this.$store.commit('saveEmail', this.credentials.email)
-        localStorage.setItem("user", JSON.stringify(this.credentials.email))
         this.$router.push("/flow")
         },
     }    
@@ -52,6 +51,7 @@
 
 .content{
     margin-top:5rem ;
+    
    
     input{
         margin-top:2rem ;
@@ -73,6 +73,7 @@
     }
     #blue{
         margin-top: 5.8rem;
+        
     }
     .btn{
         font-size: 24px;
