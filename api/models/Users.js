@@ -8,18 +8,30 @@ const jwt = require("jsonwebtoken");
 require("dotenv/config");
 
 module.exports = {
-//hämta en find med tag i
+
+async removeTag(userID,tag){
+  console.log("hej",tag)
+  let user = await users.findOne({ userID,tag });
+  if(user = null)return;
+  let data = await users.findOne({_id:userID})
+  console.log(data)
+  if(Array.isArray(data.tag)){
+    
+     let filtredtag = data.tag.filter((t) => t !== tag)
+     console.log("finns i filtred tag", filtredtag)
+     const newTags = await users.update({_id:userID},{$set: {tag:filtredtag}})
+     console.log("detta retunerar jag",newTags)
+     return newTags
+  }
+},
 
 async findTag(userID){
-    if(user = null) return;
-    let data = await users.findOne({_id:userID})
-      if(Array.isArray(data.tag)){
-        console.log(data.tag)
-        return data.tag
-      }
-
-    
-    
+  if(user = null) return;
+  let data = await users.findOne({_id:userID})
+    if(Array.isArray(data.tag)){
+      console.log(data.tag)
+      return data.tag
+    }
 },
 
 async insertTag(body, userID){
@@ -36,8 +48,6 @@ async insertTag(body, userID){
         data.push(input) 
       }
       return await users.update({_id:userID},{$set: {tag:data}})
-
-
   },
  
 

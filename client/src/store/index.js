@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import axios from "axios";
 import * as API from "@/api";
 
 Vue.use(Vuex)
@@ -79,7 +78,9 @@ export default new Vuex.Store({
   },
 
   actions: {
-  
+    // removeTag(ctx){
+    //   return axios.delete("/api/deletetag",ctx.tag)
+    // },
     newTag({commit} ,input){
       API.addtag(input)
       .then((tags) =>{

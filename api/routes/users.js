@@ -55,9 +55,21 @@ router.get("/tags", auth.auth, async (req, res) => {
 router.get("/usertags",auth.auth, async (req,res) =>{
   if(req.user.role = "user"){
     const userArray = await User.findTag(req.user.userID)
-    console.log("apa",userArray)
     if(userArray){
       res.json(userArray)
+      return
+    }
+    res.status(404).send("cant find resourses")
+  }
+})
+
+router.post("/deletedtag", auth.auth, async (req,res) =>{
+  console.log("req.body",req.body)
+  if(req.body){
+    const deleteArray = await User.removeTag(req.user.userID,req.body.tag)
+    console.log("deletade", deleteArray)
+    if(deleteArray){
+      res.json(deleteArray)
       return
     }
     res.status(404).send("cant find resourses")

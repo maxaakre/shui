@@ -6,7 +6,7 @@
   <ul class="box">
     <li v-for="(tag,index) in filteredStreams" :key="index">
       <p>#{{tag.tag}}</p>
-      <i @click="removeTag" class="fas fa-times"></i>
+      <button id="i" @click="removeTag(tag)"><i class="fas fa-times"></i></button>
     </li>
   </ul>
   <form @submit.prevent="tags">
@@ -45,7 +45,6 @@ export default {
   },  
   computed:{
   ...mapState(["isOpen", "dataEmail","tag"]),
-  //users tagggar sen filtrera dom och gemföra med listan i flow filtrera stored tags
 
   filteredStreams() {
     return this.storedTags.filter((el) => {
@@ -55,9 +54,19 @@ export default {
 }, 
 
  methods:{
-   removeTag(event){
-     console.log(event)
-     this.filteredStreams.splice(this.event)
+   async removeTag(tag){
+      let token = sessionStorage.getItem("users")
+      let parse = JSON.parse(token)
+     const res = await axios.post("/api/deletedtag",tag,{
+        headers: {
+        'Authorization': `Bearer ${parse.token}`
+        
+        }
+        },tag)
+        console.log(res.data)
+        console.log("det",this.deletedTag)
+        this.deletedTag = res.data
+        // location.reload();
    },
    tags(){
     console.log(this.input)
@@ -85,7 +94,7 @@ export default {
    console.log(RESPONSE.data)
    this.storedTags =  RESPONSE.data;
    console.log("detta finns i tags", RESPONSE)
-  }, 1000);
+  }, 2000);
 
 //to load and then filter width
   setTimeout(async() =>{ 
@@ -96,7 +105,7 @@ export default {
         });
         console.log(USERTAGS.data)
         this.hasTags = USERTAGS.data;
-  },1000)  
+  },2000)  
    
  },
 
@@ -142,8 +151,14 @@ left: 0;
     margin-left: .5rem;
     color: #fff;
   }
+  #i{
+   margin: auto .2rem;
+   color:#fff;
+   background: #EF4343;
+   border:none
+  }
   i{
-    color: #fff;
+    //  color: #fff;
     margin: auto .2rem;
   }
 
@@ -162,8 +177,8 @@ left: 0;
    background: yellow;
    position: relative;
    width: 55px;
-   right: 17px;
-   bottom: 15px; 
+   right: 3px;
+   bottom: 0px; 
   }
   #check{
    position: absolute;
@@ -176,7 +191,7 @@ left: 0;
    
     
   }
-   button{
+   .removeuser{
         width: 80%;
         position: absolute;
         padding: 1rem;

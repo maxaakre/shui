@@ -6,11 +6,6 @@
     </div>    
     <div class="list" v-if="hasItems" >
         <ul v-if="auth.loggedIn">
-       <!-- <li class="list-item" v-for="stream in streams" :key="stream._id">
-          <p>{{ stream.date }}</p>
-          <p>{{ stream.content }}</p>
-          <p>#{{ stream.tag }}</p>      
-        </li> -->
         <li v-for="tag in filteredStreams" :key="tag._id">
             <p>{{tag.date}}</p>
             <p>{{tag.content}}</p>
@@ -66,9 +61,6 @@ import axios from "axios";
                 
                    },2000)  
             }
-            // beforeMount() {
-            //     return this.$store.dispatch("getMeetList", stream);
-            // },
     }    
 </script>
 
