@@ -5,15 +5,13 @@ const butik = new Datastore({
 });
 
 const Cryptr = require('cryptr');
-const cryptr = new Cryptr("myTotalySecretKey");
+const cryptr = new Cryptr(process.env.SECRET);
 
 
 require("dotenv/config");
 
 module.exports = {
-   
-
-    async create(logs){
+   async create(logs){
         const { content, tag, date } = logs;
         const newStore = await butik.insert({
             content: await cryptr.encrypt(content),
@@ -34,9 +32,6 @@ module.exports = {
             }
             return storeObejc
         })
-        console.log("Detta får jag från newStore", newStores)
         return newStores
     }
-
-    //post tag ska ligga här
 }

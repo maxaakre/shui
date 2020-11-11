@@ -10,7 +10,6 @@
         <input type="password" v-model="credentials.password" 
         placeholder="Lösenord" />
         <button type="submit" class="btn">Logga in</button>
-        
     </form>
     <img id="blue" src="../assets/blue.png" alt="blue.png">
     </div>

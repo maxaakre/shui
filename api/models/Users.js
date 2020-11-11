@@ -10,17 +10,12 @@ require("dotenv/config");
 module.exports = {
 
 async removeTag(userID,tag){
-  console.log("hej",tag)
   let user = await users.findOne({ userID,tag });
   if(user = null)return;
   let data = await users.findOne({_id:userID})
-  console.log(data)
   if(Array.isArray(data.tag)){
-    
      let filtredtag = data.tag.filter((t) => t !== tag)
-     console.log("finns i filtred tag", filtredtag)
      const newTags = await users.update({_id:userID},{$set: {tag:filtredtag}})
-     console.log("detta retunerar jag",newTags)
      return newTags
   }
 },
@@ -29,7 +24,6 @@ async findTag(userID){
   if(user = null) return;
   let data = await users.findOne({_id:userID})
     if(Array.isArray(data.tag)){
-      console.log(data.tag)
       return data.tag
     }
 },
@@ -37,7 +31,6 @@ async findTag(userID){
 async insertTag(body, userID){
     let user = await users.findOne({ userID });
     let {input} = body
-    console.log(body ,input)
     if(user = null) return;
       let tagData = await users.findOne({_id:userID})
       let data = [];
@@ -50,9 +43,7 @@ async insertTag(body, userID){
       return await users.update({_id:userID},{$set: {tag:data}})
   },
  
-
- 
-  async register(credentials) {
+async register(credentials) {
     const { email, password, repeatPassword,tag } = credentials;
     if (email == "" || password == "" || repeatPassword == "") return;
     const user = await users.findOne({ email });
@@ -97,9 +88,7 @@ async insertTag(body, userID){
     };
   },
   async delete(id){
-    console.log("du deletade", id)
     const deleteUser = await users.remove({_id:id})
-    console.log(deleteUser)
     chats.persistence.compactDatafile()
     return deleteUser < 0
 }

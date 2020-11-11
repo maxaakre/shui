@@ -42,7 +42,7 @@ export default {
 }
 
 #app{
-  background: #19274A;;
+  background: #082756;;
   height: 100vh;
   width: 100%;
   font-family: 'Cantarell', sans-serif;

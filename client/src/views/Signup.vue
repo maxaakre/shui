@@ -48,7 +48,6 @@
   },
     methods:{
         async register() {
-            console.log("jalla")
             this.error = "";
             if (this.credentials.email == "" || this.credentials.password == "") {
                 this.error = "Fill in input fielde's";

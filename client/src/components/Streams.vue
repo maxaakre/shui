@@ -60,21 +60,16 @@ export default {
      const res = await axios.post("/api/deletedtag",tag,{
         headers: {
         'Authorization': `Bearer ${parse.token}`
-        
         }
         },tag)
-        console.log(res.data)
-        console.log("det",this.deletedTag)
         this.deletedTag = res.data
-        // location.reload();
+        location.reload();
    },
    tags(){
-    console.log(this.input)
      this.$store.dispatch('newTag', this.input)
      location.reload();
    },
    remove(){
-      console.log("error",this.credentials.email)
       this.$store.dispatch('userRemove', this.credentials.email)
     },
  },
@@ -85,27 +80,20 @@ export default {
    //to load tags
    let token = sessionStorage.getItem("users")
    let parse = JSON.parse(token)
-   setTimeout(async() =>{ 
      const RESPONSE = await axios.get("/api/tags",{
        headers: {
       'Authorization': `Bearer ${parse.token}`
     }
      });
-   console.log(RESPONSE.data)
-   this.storedTags =  RESPONSE.data;
-   console.log("detta finns i tags", RESPONSE)
-  }, 2000);
-
-//to load and then filter width
-  setTimeout(async() =>{ 
+    this.storedTags =  RESPONSE.data;
+    //to load and then filter width
     const USERTAGS = await axios.get("/api/usertags",{
-        headers: {
-        'Authorization': `Bearer ${parse.token}`
-        }
-        });
-        console.log(USERTAGS.data)
-        this.hasTags = USERTAGS.data;
-  },2000)  
+      headers: {
+      'Authorization': `Bearer ${parse.token}`
+      }
+      });
+      this.hasTags = USERTAGS.data;
+  
    
  },
 
@@ -174,7 +162,6 @@ left: 0;
     border-radius: 5px;
   }
   #line{
-   background: yellow;
    position: relative;
    width: 55px;
    right: 3px;
@@ -182,15 +169,10 @@ left: 0;
   }
   #check{
    position: absolute;
-   background: #fff;
-   width: 55px;
-   height: 60px;
    left: 299px;
    top: 447px;
    border-radius: 5px;
-   
-    
-  }
+   }
    .removeuser{
         width: 80%;
         position: absolute;
@@ -203,7 +185,6 @@ left: 0;
         font-family: 'PT Sans', sans-serif;
         border: 1px solid #000000;
         box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
-        
     }    
   
  }
@@ -216,9 +197,7 @@ left: 0;
   left: 0px;
   top: 0px;
   background:60% #EF4343;
-
   border-radius: 0px;
-
-  }
+}
 
 </style>

@@ -32,17 +32,14 @@ router.post("/delete", auth.auth, async (req,res) =>{
 
 router.post("/addtag" , auth.auth,  async (req,res) => {
   if(req.user.userID){
-    console.log(req.user.userID)
-    console.log(req.body)
     const newtag = await User.insertTag(req.body, req.user.userID);
     res.status(201).json(newtag)
-    console.log(newtag)
   }else
     res.status(404).send("User not found")
 })
 
 router.get("/tags", auth.auth, async (req, res) => {
-  if(req.user.role = "user"){
+  if(req.user.userID){
     const streams = await butik.createdlogs(req.user.userID)
     if(streams){
       res.json(streams)
@@ -53,7 +50,7 @@ router.get("/tags", auth.auth, async (req, res) => {
 });
 
 router.get("/usertags",auth.auth, async (req,res) =>{
-  if(req.user.role = "user"){
+  if(req.user.userID){
     const userArray = await User.findTag(req.user.userID)
     if(userArray){
       res.json(userArray)
@@ -64,10 +61,8 @@ router.get("/usertags",auth.auth, async (req,res) =>{
 })
 
 router.post("/deletedtag", auth.auth, async (req,res) =>{
-  console.log("req.body",req.body)
-  if(req.body){
+  if(req.user.role = "user"){
     const deleteArray = await User.removeTag(req.user.userID,req.body.tag)
-    console.log("deletade", deleteArray)
     if(deleteArray){
       res.json(deleteArray)
       return

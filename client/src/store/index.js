@@ -38,9 +38,6 @@ export default new Vuex.Store({
       )
       
     },
-    displayMeets(state, items) {
-      state.items = items;
-    },
     TOGGLE_SIDE_MENU(state) {
       state.isOpen = !state.isOpen;
     },
@@ -78,9 +75,6 @@ export default new Vuex.Store({
   },
 
   actions: {
-    // removeTag(ctx){
-    //   return axios.delete("/api/deletetag",ctx.tag)
-    // },
     newTag({commit} ,input){
       API.addtag(input)
       .then((tags) =>{

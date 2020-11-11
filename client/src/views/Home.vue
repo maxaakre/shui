@@ -10,26 +10,18 @@
 </template>
 
 <script>
-// @ is an alias to /src
-
-
-
 export default {
   name: 'Home',
-
 }
 </script>
 <style lang="scss" scoped >
 .content{
   display: flex;
   flex-direction: column;
-  
-  
   #logo{
   width: 50px;  
   padding-top: 15rem ;
   margin: auto;
-  
   }
   h1{
     color: white;

@@ -7,9 +7,10 @@
     <div class="list" v-if="hasItems" >
         <ul v-if="auth.loggedIn">
         <li v-for="tag in filteredStreams" :key="tag._id">
-            <p>{{tag.date}}</p>
+            <p class="date">{{tag.date}}</p>
             <p>{{tag.content}}</p>
-            <p>{{tag.date}}</p>
+            <p>---{{tag.tag}}</p>
+        <div class="tags">#{{tag.tag}}</div>
         </li>
         <button class="btn" @click="$store.commit('TOGGLE_SIDE_MENU')">Add Streams</button>
         </ul>
@@ -41,25 +42,20 @@ import axios from "axios";
         
         },
             async mounted() {
+             //Hämtar alla streams
                 const RESPONSE = await axios.get("/api/butiker/stores");
                 this.streams =  RESPONSE.data;
                 this.hasItems = true
-
+            //Hämtar alla streams som använaren har i user
                 let token = sessionStorage.getItem("users")
                 let parse = JSON.parse(token)
-                   setTimeout(async() =>{ 
-                    const USERTAGS = await axios.get("/api/usertags",{
-                    headers: {
-                    'Authorization': `Bearer ${parse.token}`
-                    }
-                    });
-                    console.log(USERTAGS.data)
-                    this.hasTags = USERTAGS.data;
+                const USERTAGS = await axios.get("/api/usertags",{
+                headers: {
+                'Authorization': `Bearer ${parse.token}`
+                }
+                });
+                this.hasTags = USERTAGS.data;
                     
-                
-                   
-                
-                   },2000)  
             }
     }    
 </script>
@@ -92,10 +88,11 @@ import axios from "axios";
     p{
         margin: auto 10px;
         text-align: left;
-        
         font-size: 16px;
-        font-weight: 400;
         font-family: 'PT Sans', sans-serif;
+    }
+    .date{
+        font-size: 13px;
     }
     span{
     display: flex;
@@ -104,6 +101,13 @@ import axios from "axios";
     margin: 10px 10px 10px;
     
        
+    }
+    .tags{
+        background: #082756;
+        color: #00B2FF;
+        font-weight: 400;
+        text-align: right;
+        box-shadow: none;
     }
     .btn{
         width: 90%;
