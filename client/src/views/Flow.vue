@@ -43,18 +43,25 @@ import axios from "axios";
         },
             async mounted() {
              //Hämtar alla streams
-                const RESPONSE = await axios.get("/api/butiker/stores");
-                this.streams =  RESPONSE.data;
-                this.hasItems = true
-            //Hämtar alla streams som använaren har i user
-                let token = sessionStorage.getItem("users")
-                let parse = JSON.parse(token)
-                const USERTAGS = await axios.get("/api/usertags",{
+                setTimeout(async() =>{
+                     let token = sessionStorage.getItem("users")
+                    let parse = JSON.parse(token)
+                    const RESPONSE = await axios.get("/api/butiker/stores",{
+                    headers: {
+                    'Authorization': `Bearer ${parse.token}`
+                    }
+                    });
+                    this.streams =  RESPONSE.data;
+                    this.hasItems = true
+                    //Hämtar alla streams som använaren har i user
+                     const USERTAGS = await axios.get("/api/usertags",{
                 headers: {
                 'Authorization': `Bearer ${parse.token}`
                 }
                 });
                 this.hasTags = USERTAGS.data;
+
+                },1000)
                     
             }
     }    
